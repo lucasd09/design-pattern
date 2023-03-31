@@ -1,15 +1,10 @@
 import { Product } from "./products";
+import { BudgetState } from "./status/stateInterface";
 
-export enum BudgetStatus {
-  Pending = "pending",
-  Approved = "approved",
-  Rejected = "rejected",
-  Closed = "closed",
-}
 export interface BudgetProps {
   itens: Array<Product>;
   value: number;
-  status: BudgetStatus;
+  status: BudgetState;
 }
 
 export class Budget {
@@ -38,10 +33,8 @@ export class Budget {
     return this.props.status;
   }
 
-  set status(status: BudgetStatus) {
-    if (this.props.status != BudgetStatus.Closed) {
-      this.props.status = status;
-    } else throw Error("Cannot change status of a closed budget");
+  set status(status: BudgetState) {
+    this.props.status = status;
   }
 
   recalculateBudget() {
