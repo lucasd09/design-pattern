@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 import { Discount } from "./discounts";
-import { Budget } from "./budgets";
+import { Budget, BudgetStatus } from "./budgets";
 import { Product } from "./products";
 
 test("Create a discount", () => {
@@ -23,6 +23,7 @@ test("Add a discount to a product", () => {
   const budget = new Budget({
     itens: [],
     value: 0,
+    status: BudgetStatus.Pending,
   });
 
   const product = new Product({
