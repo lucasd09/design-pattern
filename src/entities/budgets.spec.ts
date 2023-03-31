@@ -1,12 +1,15 @@
 import { expect, test } from "vitest";
-import { Budget, BudgetStatus } from "./budgets";
+import { Budget } from "./budgets";
 import { Product } from "./products";
+import { Approved } from "./status/approved";
+import { Closed } from "./status/closed";
+import { Pending } from "./status/pending";
 
 test("create a budget", () => {
   const budget = new Budget({
     itens: [],
     value: 0,
-    status: BudgetStatus.Pending,
+    state: new Pending(),
   });
 
   expect(budget).toBeInstanceOf(Budget);
@@ -17,7 +20,7 @@ test("Add a product to a Pending budget", () => {
   const budget = new Budget({
     itens: [],
     value: 0,
-    status: BudgetStatus.Pending,
+    state: new Pending,
   });
 
   const product = new Product({
@@ -27,7 +30,7 @@ test("Add a product to a Pending budget", () => {
   });
 
   expect(() => {
-    budget.addItem = product;
+    budget.addItem(product);
   });
 });
 
@@ -35,7 +38,7 @@ test("Cannot add itens in a approved or rejected Budget", () => {
   const budget = new Budget({
     itens: [],
     value: 0,
-    status: BudgetStatus.Approved,
+    state: new Approved(),
   });
 
   const product = new Product({
@@ -45,7 +48,7 @@ test("Cannot add itens in a approved or rejected Budget", () => {
   });
 
   expect(() => {
-    budget.addItem = product;
+    budget.addItem(product);
   }).toThrow;
 });
 
@@ -53,7 +56,7 @@ test("Status change of a budget", () => {
   const budget = new Budget({
     itens: [],
     value: 0,
-    status: BudgetStatus.Pending,
+    state: new Pending(),
   });
 
   const product = new Product({
@@ -62,21 +65,21 @@ test("Status change of a budget", () => {
     qtd: 1,
   });
 
-  budget.addItem = product;
+  budget.addItem(product);
 
-  budget.status = BudgetStatus.Approved;
+  budget.state = new Approved();
 
-  expect(budget.status).toEqual(BudgetStatus.Approved);
+  expect(budget.state).toBeInstanceOf(Approved);
 });
 
 test("Cannot change status of a close budget", () => {
   const budget = new Budget({
     itens: [],
     value: 0,
-    status: BudgetStatus.Closed,
+    state: new Closed(),
   });
 
   expect(() => {
-    budget.status = BudgetStatus.Pending;
+    budget.state.Approve;
   }).toThrow;
 });

@@ -1,19 +1,18 @@
 import { Budget } from "../budgets";
-import { Closed } from "./closed";
 import { Rejected } from './rejected'
 import { BudgetState } from "./stateInterface";
 
-export class Approved implements BudgetState {
+export class Closed implements BudgetState {
   ApplyExtraDiscount(budget: Budget) {
-    budget.addExtraDiscount -= budget.budgetValue * 0.05;
+    budget.addExtraDiscount += budget.budgetValue * 0.05;
   }
   Approve(budget: Budget) {
-    throw Error("Budget already approved");
+    throw Error("Budget closed");
   }
   Reject(budget: Budget) {
-    budget.state = new Rejected();
+    throw Error('Budget closed')
   }
   Close(budget: Budget) {
-    budget.state = new Closed();
+    throw Error('Budget closed')
   }
 }

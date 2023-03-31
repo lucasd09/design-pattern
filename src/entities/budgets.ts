@@ -1,14 +1,16 @@
 import { Product } from "./products";
+import { Pending } from "./status/pending";
 import { BudgetState } from "./status/stateInterface";
 
 export interface BudgetProps {
   itens: Array<Product>;
   value: number;
-  status: BudgetState;
+  state: BudgetState;
 }
 
 export class Budget {
   private props: BudgetProps;
+  private extraDiscount : number;
 
   constructor(props: BudgetProps) {
     this.props = props;
@@ -23,23 +25,27 @@ export class Budget {
     return this.props.itens;
   }
 
-  set addItem(product: Product) {
-    if ((this.props.status = BudgetStatus.Pending)) {
-      this.props.itens.push(product);
-    } else throw Error("Cannot add itens in a closed budget");
+  addItem(product: Product) {
+    this.props.itens.push(product);
   }
 
-  get status() {
-    return this.props.status;
+  get state() {
+    return this.props.state;
   }
 
-  set status(status: BudgetState) {
-    this.props.status = status;
+  set state(state: BudgetState) {
+    this.props.state = state;
+  }
+
+  set addExtraDiscount(value : number) {
+    this.extraDiscount = value
+    this.recalculateBudget
   }
 
   recalculateBudget() {
     this.itens.forEach((e) => {
       this.props.value += e.value;
     });
+    this.props.value - this.extraDiscount
   }
 }

@@ -1,7 +1,8 @@
 import { expect, test } from "vitest";
 import { Discount } from "./discounts";
-import { Budget, BudgetStatus } from "./budgets";
+import { Budget } from "./budgets";
 import { Product } from "./products";
+import { Pending } from "./status/pending";
 
 test("Create a discount", () => {
   const discount = new Discount({
@@ -23,7 +24,7 @@ test("Add a discount to a product", () => {
   const budget = new Budget({
     itens: [],
     value: 0,
-    status: BudgetStatus.Pending,
+    state: new Pending,
   });
 
   const product = new Product({
@@ -32,7 +33,7 @@ test("Add a discount to a product", () => {
     qtd: 6,
   });
 
-  budget.addItem = product;
+  budget.addItem(product)
 
   expect(discount.verifyByQuantity(budget.itens[0])).toEqual(true);
   expect(discount.verifyByProduct(budget.itens[0])).toEqual(false);
