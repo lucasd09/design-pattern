@@ -1,0 +1,17 @@
+{
+  "name": "design-pattern",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vitest/ui": "^0.29.8",
+    "eslint": "^8.37.0",
+    "vitest": "^0.29.8"
+  }
+}
