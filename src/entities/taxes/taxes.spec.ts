@@ -3,6 +3,7 @@ import { ICMS } from "./icms";
 import { IVLR } from "./ivlr";
 import { IQTD } from "./iqtd";
 import { Product } from "../products";
+import { CompoundTax } from "./compoundTaxes";
 
 test("create Taxes", () => {
   const icms = new ICMS({
@@ -98,4 +99,28 @@ test("IVLR should only add value over the limit", () => {
 
   expect(banana.value).toEqual(3);
   expect(chocolate.value).toEqual(6.18);
+});
+
+test("compound taxes should be applied if condition is true", () => {
+  const chocolate = new Product({
+    name: "Chocolate",
+    value: 6,
+    qtd: 6,
+  });
+
+  const iqtd = new IQTD({
+    perc: 4,
+    limit: 5,
+  });
+
+  const icms = new ICMS({
+    perc: 5,
+    taxedProduct: "Chocolate",
+  });
+
+  const compoundTax = new CompoundTax(icms, iqtd);
+
+  chocolate.value = compoundTax.calculate(chocolate);
+
+  expect(chocolate.value).toEqual(6.552);
 });
