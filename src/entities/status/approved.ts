@@ -1,6 +1,6 @@
 import { Budget } from "../budgets";
 import { Closed } from "./closed";
-import { Rejected } from './rejected'
+import { Rejected } from "./rejected";
 import { BudgetState } from "./stateInterface";
 
 export class Approved implements BudgetState {

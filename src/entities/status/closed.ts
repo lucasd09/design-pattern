@@ -1,5 +1,5 @@
 import { Budget } from "../budgets";
-import { Rejected } from './rejected'
+import { Rejected } from "./rejected";
 import { BudgetState } from "./stateInterface";
 
 export class Closed implements BudgetState {
@@ -10,9 +10,9 @@ export class Closed implements BudgetState {
     throw Error("Budget closed");
   }
   Reject(budget: Budget) {
-    throw Error('Budget closed')
+    throw Error("Budget closed");
   }
   Close(budget: Budget) {
-    throw Error('Budget closed')
+    throw Error("Budget closed");
   }
 }
