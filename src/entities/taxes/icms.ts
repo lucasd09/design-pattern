@@ -9,7 +9,7 @@ export interface ICMSProps {
 export class ICMS extends Tax {
   private props: ICMSProps;
 
-  constructor(props: ICMSProps, secondTax? : Tax) {
+  constructor(props: ICMSProps, secondTax?: Tax) {
     super();
     this.props = props;
   }

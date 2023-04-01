@@ -4,6 +4,8 @@ import { IVLR } from "./ivlr";
 import { IQTD } from "./iqtd";
 import { Product } from "../products";
 import { CompoundTax } from "./compoundTaxes";
+import { CondicionalTax } from "./condicionalTaxes";
+import { ICTX } from "./ictx";
 
 test("create Taxes", () => {
   const icms = new ICMS({
@@ -125,12 +127,16 @@ test("compound taxes should be applied if condition is true", () => {
   expect(chocolate.value).toEqual(6.552);
 });
 
-test('compound taxes should work by adding another tax inside a tax', () => {
-  const compoundICMS = new ICMS({
-    perc: 5,
-    taxedProduct: "Chocolate",
-  }, new ICMS({
-    perc: 5,
-    taxedProduct: "Chocolate",
-  }));
-})
+test("Conditional taxes should work", () => {
+  const chocolate = new Product({
+    name: "Chocolate",
+    value: 6,
+    qtd: 11,
+  });
+
+  const conditinalTax = new ICTX();
+
+  chocolate.value += conditinalTax.calculate(chocolate);
+
+  expect(chocolate.value).toEqual(6.6);
+});
