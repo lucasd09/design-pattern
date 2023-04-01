@@ -1,10 +1,11 @@
 import { Product } from "../products";
 import { Tax } from "./taxes";
 
-export class CompoundTax implements Tax {
+export class CompoundTax extends Tax {
   private taxes: Tax[];
 
   constructor(...taxes: Tax[]) {
+    super();
     this.taxes = taxes;
   }
 

@@ -124,3 +124,13 @@ test("compound taxes should be applied if condition is true", () => {
 
   expect(chocolate.value).toEqual(6.552);
 });
+
+test('compound taxes should work by adding another tax inside a tax', () => {
+  const compoundICMS = new ICMS({
+    perc: 5,
+    taxedProduct: "Chocolate",
+  }, new ICMS({
+    perc: 5,
+    taxedProduct: "Chocolate",
+  }));
+})
