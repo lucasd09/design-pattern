@@ -1,5 +1,4 @@
 import { Product } from "./products";
-import { Pending } from "./status/pending";
 import { BudgetState } from "./status/stateInterface";
 
 export interface BudgetProps {
@@ -10,7 +9,7 @@ export interface BudgetProps {
 
 export class Budget {
   private props: BudgetProps;
-  private extraDiscount : number;
+  private extraDiscount: number;
 
   constructor(props: BudgetProps) {
     this.props = props;
@@ -37,15 +36,15 @@ export class Budget {
     this.props.state = state;
   }
 
-  set addExtraDiscount(value : number) {
-    this.extraDiscount = value
-    this.recalculateBudget
+  set addExtraDiscount(value: number) {
+    this.extraDiscount = value;
+    this.recalculateBudget;
   }
 
   recalculateBudget() {
     this.itens.forEach((e) => {
       this.props.value += e.value;
     });
-    this.props.value - this.extraDiscount
+    this.props.value - this.extraDiscount;
   }
 }

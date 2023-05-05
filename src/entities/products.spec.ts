@@ -1,14 +1,13 @@
-import { test, expect } from 'vitest'
-import { Product } from './products'
+import { test, expect } from "vitest";
+import { Product } from "./products";
 
-test('create a product', () => {
+test("create a product", () => {
   const product = new Product({
-    name  : 'Chocolate',
-    value : 6.50,
-    qtd   : 1
-  })
+    name: "Chocolate",
+    value: 6.5,
+    qtd: 1,
+  });
 
-  expect(product).toBeInstanceOf(Product)
-  expect(product.name).toEqual('Chocolate')
-
-})
+  expect(product).toBeInstanceOf(Product);
+  expect(product.name).toEqual("Chocolate");
+});
